@@ -1,0 +1,7 @@
+{
+  "name": "SouthHillsApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
