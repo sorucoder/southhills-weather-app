@@ -1,0 +1,51 @@
+<ion-card>
+    <ion-progress-bar type="indeterminate" *ngIf="(loading$ | async) === true"></ion-progress-bar>
+    <ion-card-header>
+        <ion-title>{{ location }}</ion-title>
+    </ion-card-header>
+    <ion-card-content *ngIf="(loading$ | async) === false">
+        <ion-list id="current" lines="none">
+            <ion-item>
+                <ion-avatar aria-hidden="true" slot="start">
+                    <img [src]="weather.current.condition.icon" [alt]="weather.current.condition.text + ' icon'" />
+                </ion-avatar>
+                <ion-label style="font-size: 3rem;">{{ weather.current.temp_f }}°</ion-label>
+            </ion-item>
+            <ion-item>
+                <ion-label>{{ weather.current.condition.text | titlecase }}</ion-label>
+            </ion-item>
+            <ion-item>
+                <ion-label>Feels like {{ weather.current.feelslike_f }}°</ion-label>
+            </ion-item>
+        </ion-list>
+
+        <ion-grid>
+            <table style="text-align: center;">
+                <thead>
+                    <tr>
+                        <th *ngFor="let forecast of weather.forecast.forecastday">
+                            {{ forecast.date | date:'ccc' | uppercase }}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td *ngFor="let forecast of weather.forecast.forecastday">
+                            <img [src]="forecast.day.condition.icon" [alt]="forecast.day.condition.text + ' icon'" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td *ngFor="let forecast of weather.forecast.forecastday">
+                            {{ forecast.day.mintemp_f }}°
+                        </td>
+                    </tr>
+                    <tr>
+                        <td *ngFor="let forecast of weather.forecast.forecastday">
+                            {{ forecast.day.maxtemp_f }}°
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </ion-grid>
+    </ion-card-content>
+</ion-card>
